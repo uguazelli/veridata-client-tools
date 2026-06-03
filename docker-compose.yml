@@ -12,7 +12,7 @@ services:
     volumes:
       - ./public:/app/public
       - ./src:/app/src
-      - ./data:/app/data
+      - data:/app/data
     develop:
       watch:
         - action: sync+restart
@@ -43,6 +43,9 @@ services:
       veridata.network:
         aliases:
           - client.tools
+
+volumes:
+  data:
 
 networks:
   veridata.network:

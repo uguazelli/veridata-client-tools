@@ -1,6 +1,7 @@
 # VeriDataPro Integration Tools
 
-Plain Node.js + Express app for VeriDataPro lead generation. It currently includes five no-framework tools:
+FastAPI (Python) backend serving VeriDataPro's lead-generation tools. The frontend
+is no-framework vanilla JS/HTML served as static assets. Five tools:
 
 - MuleSoft Cost & Utilization Risk Calculator
 - API Readiness Assessment Tool
@@ -8,100 +9,97 @@ Plain Node.js + Express app for VeriDataPro lead generation. It currently includ
 - Integration Audit Template Pack
 - Odoo Integration Complexity Mapper
 
-The MuleSoft, API readiness, and audit pack tools capture qualified lead details and save submissions to CSV. The flat file validator and Odoo complexity mapper run fully in the browser and do not upload files to the server.
+The MuleSoft, API readiness, and audit pack tools capture qualified lead details
+and persist them to SQLite (upsert by email — one row per contact). The flat file
+validator and Odoo complexity mapper run fully in the browser. A shared identity
+modal captures a visitor once and records them in the `contacts` table.
 
 ## Run Locally
 
+Requires [uv](https://docs.astral.sh/uv/).
+
 ```bash
-npm install
-npm start
+cd backend
+uv sync
+uv run uvicorn app.main:app --reload --port 3000
 ```
 
 The app listens on these paths by default:
 
-- `http://localhost:3000/docs`
+- `http://localhost:3000/docs` (tools directory)
 - `http://localhost:3000/mulesoft-calculator`
 - `http://localhost:3000/api-readiness-assessment`
 - `http://localhost:3000/file-validator`
 - `http://localhost:3000/integration-audit-pack`
 - `http://localhost:3000/odoo-integration-complexity-mapper`
 
+> Note: FastAPI's own interactive OpenAPI docs are served at `/docs` *by default*,
+> but that path is used here for the tools directory page, which takes precedence.
+
 Environment variables:
 
 - `PORT`: server port, default `3000`
-- `DOCS_BASE_PATH`: docs directory URL path, default `/docs`
-- `TOOLS_BASE_PATH`: legacy alias for the docs directory URL path
+- `DB_PATH`: SQLite database file, default `data/app.db`
+- `DOCS_BASE_PATH`: tools directory URL path, default `/docs`
 - `BASE_PATH`: MuleSoft calculator URL path, default `/mulesoft-calculator`
-- `LEADS_CSV_PATH`: MuleSoft CSV output path, default `data/leads.csv`
-- `API_READINESS_BASE_PATH`: API readiness tool URL path, default `/api-readiness-assessment`
-- `API_READINESS_CSV_PATH`: API readiness CSV output path, default `data/api-readiness-leads.csv`
-- `FILE_VALIDATOR_BASE_PATH`: flat file validator URL path, default `/file-validator`
-- `INTEGRATION_AUDIT_PACK_BASE_PATH`: audit pack URL path, default `/integration-audit-pack`
-- `INTEGRATION_AUDIT_PACK_CSV_PATH`: audit pack CSV output path, default `data/integration-audit-pack-leads.csv`
-- `ODOO_COMPLEXITY_MAPPER_BASE_PATH`: Odoo mapper URL path, default `/odoo-integration-complexity-mapper`
+- `API_READINESS_BASE_PATH`: default `/api-readiness-assessment`
+- `FILE_VALIDATOR_BASE_PATH`: default `/file-validator`
+- `INTEGRATION_AUDIT_PACK_BASE_PATH`: default `/integration-audit-pack`
+- `ODOO_COMPLEXITY_MAPPER_BASE_PATH`: default `/odoo-integration-complexity-mapper`
 
 ## Docker Compose
 
 ```bash
-docker compose up --build
+docker compose up --build       # build + run
+docker compose watch            # local dev with autoreload
 ```
 
-For local container development with autoreload on source changes:
-
-```bash
-docker compose watch
-```
-
-Compose syncs `src/` and `public/` into the running container and restarts the service. Changes to `package*.json`, `Dockerfile`, or `docker-compose.yml` trigger a rebuild.
+Compose builds from `backend/Dockerfile`, syncs `backend/app` and `public/` into
+the container, and persists the SQLite DB in the `data` volume.
 
 ## Endpoints
 
-- `GET /docs`: docs directory page
-- `GET /mulesoft-calculator`: calculator frontend
-- `POST /mulesoft-calculator/api/calculate`: validates input, saves the lead, and returns the assessment JSON
-- `GET /api-readiness-assessment`: API readiness assessment frontend
-- `POST /api-readiness-assessment/api/assess`: validates input, saves the lead, and returns the readiness report JSON
-- `GET /file-validator`: client-side flat file validation frontend
-- `GET /integration-audit-pack`: audit pack lead form frontend
-- `POST /integration-audit-pack/api/request`: validates input, saves the lead, and returns the document download URL
-- `GET /odoo-integration-complexity-mapper`: client-side Odoo integration complexity mapper frontend
-- `GET /health`: basic health check for deployment
-- `GET /docs/health`: docs directory health check
-- `GET /mulesoft-calculator/health`: tool-level health check
-- `GET /api-readiness-assessment/health`: tool-level health check
-- `GET /file-validator/health`: tool-level health check
-- `GET /integration-audit-pack/health`: tool-level health check
-- `GET /odoo-integration-complexity-mapper/health`: tool-level health check
+- `GET /docs`, `/mulesoft-calculator`, `/api-readiness-assessment`,
+  `/file-validator`, `/integration-audit-pack`,
+  `/odoo-integration-complexity-mapper`: tool frontends
+- `POST /api/contact`: global identity capture (upsert by email)
+- `POST /mulesoft-calculator/api/calculate`: validate, save lead, return assessment JSON
+- `POST /api-readiness-assessment/api/assess`: validate, save lead, return readiness JSON
+- `POST /integration-audit-pack/api/request`: validate, save lead, return document download URL
+- `GET /health`: health check for deployment
 
 ## Project Structure
 
 ```text
-public/
-  shared/                         # logo and shared CSS
-  tools/
-    mulesoft-calculator/          # MuleSoft frontend
-    api-readiness/                # API readiness frontend
-    file-validator/               # flat file validator frontend
-    integration-audit-pack/       # gated Word document download frontend
-    odoo-complexity-mapper/       # Odoo complexity mapper frontend
+public/                             # vanilla JS/HTML frontend (served as static assets)
+  shared/                           # logo, shared CSS, identity module
+  tools/<tool>/                     # one folder per tool frontend
 
-src/
-  app.js                          # Express app composition
-  server.js                       # local/server entrypoint
-  shared/                         # shared routing, CSV, and path helpers
-  tools/
-    mulesoft-calculator/          # MuleSoft API, validation, scoring, CSV store
-    api-readiness/                # readiness API, validation, scoring, CSV store
-    file-validator/               # static tool registration only; analysis runs in browser
-    integration-audit-pack/       # audit pack API, validation, CSV store, static document registration
-    odoo-complexity-mapper/       # static tool registration only; analysis runs in browser
+backend/
+  app/
+    main.py                         # FastAPI app: routers + static/templated tool serving
+    config.py                       # env-driven base paths
+    db.py                           # SQLite schema + connection (upsert by email)
+    tools/
+      contact/                      # global identity endpoint
+      mulesoft/                     # calculator, Pydantic schemas, store, router
+      api_readiness/                # scoring, schemas, store, router
+      integration_audit/            # schemas, store, router
+  tests/
+    golden/                         # frozen Node outputs (parity oracle)
+    test_*_parity.py                # Python logic vs frozen Node fixtures
+    test_*_api.py                   # API behaviour + upsert tests
 ```
 
 ## Tests
 
 ```bash
-npm test
-npm run test:e2e
+cd backend
+uv run pytest
 ```
 
-The MuleSoft calculator provides directional optimization signals only. It does not provide official MuleSoft or Salesforce pricing.
+Parity tests compare the Python calculator/scoring against outputs frozen from the
+original Node implementation (`tests/golden/`), so the ported logic stays faithful.
+
+The MuleSoft calculator provides directional optimization signals only. It does not
+provide official MuleSoft or Salesforce pricing.

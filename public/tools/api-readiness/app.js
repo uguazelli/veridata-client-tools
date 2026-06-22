@@ -38,6 +38,7 @@ const ANSWER_FIELDS = [
 ];
 
 import { TRANSLATIONS } from "../../shared/translations/api-readiness.js";
+import { ensureIdentity, getContact, renderIdentityBadge } from "../../shared/identity.js";
 
 let currentLanguage = localStorage.getItem("calculatorLanguage") || "en";
 let lastResult = null;
@@ -47,14 +48,22 @@ function t(key, values = {}) {
   return Object.entries(values).reduce((memo, [name, value]) => memo.replaceAll(`{${name}}`, value), text);
 }
 
+function identityFields() {
+  const contact = getContact() || {};
+  return {
+    fullName: contact.fullName || "",
+    email: contact.email || "",
+    company: contact.company || "",
+    clientId: contact.clientId || ""
+  };
+}
+
 function getPayload() {
   const data = new FormData(form);
   return {
     language: currentLanguage,
     lead: {
-      fullName: data.get("fullName"),
-      email: data.get("email"),
-      company: data.get("company"),
+      ...identityFields(),
       website: data.get("website"),
       companySize: data.get("companySize"),
       timeline: data.get("timeline")
@@ -289,6 +298,10 @@ async function submitForm(event) {
     return;
   }
 
+  const contact = await ensureIdentity({ source: "api-readiness", language: currentLanguage });
+  if (!contact) return; // user dismissed the lead modal
+  renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });
+
   submitButton.disabled = true;
   submitLabel.textContent = t("form.calculating");
 
@@ -353,3 +366,7 @@ form.addEventListener("input", updatePreview);
 form.addEventListener("change", updatePreview);
 form.addEventListener("submit", submitForm);
 setLanguage(LANGUAGES.has(currentLanguage) ? currentLanguage : "en", { resetResult: false });
+
+// Badge shows only if the visitor is already known; the modal appears on demand
+// when they submit for a result.
+renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });

@@ -1,9 +1,10 @@
-node_modules
-npm-debug.log
 .git
 .gitignore
 .DS_Store
 data
-coverage
-playwright-report
-test-results
+backend/.venv
+backend/tests
+**/__pycache__
+**/*.pyc
+.pytest_cache
+*.db

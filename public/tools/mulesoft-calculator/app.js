@@ -20,6 +20,7 @@ const HTML_LANG = {
 };
 
 import { TRANSLATIONS } from "../../shared/translations/mulesoft-calculator.js";
+import { ensureIdentity, getContact, renderIdentityBadge } from "../../shared/identity.js";
 
 const footprintFields = [
   "deploymentModel",
@@ -52,9 +53,17 @@ function getPayload() {
     managedApis: data.get("managedApis"),
     addons: data.getAll("addons"),
     renewalTimeline: data.get("renewalTimeline"),
-    fullName: data.get("fullName"),
-    email: data.get("email"),
-    company: data.get("company")
+    ...identityFields()
+  };
+}
+
+function identityFields() {
+  const contact = getContact() || {};
+  return {
+    fullName: contact.fullName || "",
+    email: contact.email || "",
+    company: contact.company || "",
+    clientId: contact.clientId || ""
   };
 }
 
@@ -248,6 +257,10 @@ async function submitForm(event) {
     return;
   }
 
+  const contact = await ensureIdentity({ source: "mulesoft-calculator", language: currentLanguage });
+  if (!contact) return; // user dismissed the lead modal
+  renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });
+
   submitButton.disabled = true;
   submitLabel.textContent = t("form.calculating");
 
@@ -312,3 +325,7 @@ form.addEventListener("input", updatePreview);
 form.addEventListener("change", updatePreview);
 form.addEventListener("submit", submitForm);
 setLanguage(LANGUAGES.has(currentLanguage) ? currentLanguage : "en", { resetResult: false });
+
+// Show the badge only if we already know the visitor; the modal itself now
+// appears on demand when they submit for a result.
+renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });

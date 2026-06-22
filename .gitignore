@@ -4,5 +4,8 @@ npm-debug.log*
 .env
 coverage/
 data/*.csv
+data/*.db
+data/*.db-wal
+data/*.db-shm
 playwright-report/
 tests/test-results/

@@ -24,6 +24,7 @@ const HTML_LANG = {
 };
 
 import { TRANSLATIONS, DATA } from "../../shared/translations/odoo-complexity-mapper.js";
+import { ensureIdentity, renderIdentityBadge } from "../../shared/identity.js";
 
 const { SYSTEM_GROUPS, MODULE_GROUPS, SYSTEM_ALIASES, SYSTEM_COPY, MODULE_LABELS, MODULE_TOKEN_LABELS, CATEGORY_LABEL_KEYS, MODULE_GROUP_LABEL_KEYS, COMPLEXITY_MATRIX, MODULE_MATCHES } = DATA;
 
@@ -330,8 +331,13 @@ function buildRows() {
   });
 }
 
-function generateResults() {
+async function generateResults() {
   if (!validateStepTwo()) return;
+
+  // Capture the lead once, the first time they generate the result.
+  const contact = await ensureIdentity({ source: "odoo-complexity-mapper", language: currentLanguage });
+  if (!contact) return; // user dismissed the lead modal
+  renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });
 
   currentRows = buildRows();
   renderScopeSummary(currentRows);
@@ -797,3 +803,5 @@ function exportResultsPdf() {
 
 setLanguage(LANGUAGES.has(currentLanguage) ? currentLanguage : "en");
 setStep(1);
+// Show the badge if the visitor is already known on this device.
+renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });

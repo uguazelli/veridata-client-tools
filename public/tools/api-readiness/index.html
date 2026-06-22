@@ -230,21 +230,6 @@
               </div>
             </div>
 
-            <div class="grid">
-              <label>
-                <span data-i18n="form.name">Name</span>
-                <input name="fullName" autocomplete="name" placeholder="Alex Rivera" required />
-              </label>
-              <label>
-                <span data-i18n="form.email">Business email</span>
-                <input name="email" type="email" autocomplete="email" placeholder="alex@company.com" required />
-              </label>
-              <label>
-                <span data-i18n="form.company">Company</span>
-                <input name="company" autocomplete="organization" placeholder="Company Inc." required />
-              </label>
-            </div>
-
             <p class="optional-sep">Optional</p>
             <div class="grid lead-extra">
               <label>
@@ -253,7 +238,7 @@
               </label>
               <label>
                 <span data-i18n="form.companySize">Company size</span>
-                <select name="companySize" required>
+                <select name="companySize">
                   <option value="" data-i18n="form.chooseOne">Choose one</option>
                   <option value="1-10">1-10</option>
                   <option value="11-50">11-50</option>
@@ -264,7 +249,7 @@
               </label>
               <label>
                 <span data-i18n="form.timeline">Timeline</span>
-                <select name="timeline" required>
+                <select name="timeline">
                   <option value="" data-i18n="form.chooseOne">Choose one</option>
                   <option value="now" data-i18n="timeline.now">Now</option>
                   <option value="1-3" data-i18n="timeline.1-3">1-3 months</option>
@@ -275,6 +260,8 @@
             </div>
 
             <p id="formError" class="form-error" role="alert" hidden></p>
+
+            <div data-identity-badge class="identity-badge-row"></div>
 
             <button class="submit-button" type="submit">
               <span data-submit-label data-i18n="form.submit">Generate readiness report</span>

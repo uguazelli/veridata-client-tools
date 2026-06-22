@@ -17,6 +17,7 @@ const HTML_LANG = {
 };
 
 import { TRANSLATIONS } from "../../shared/translations/integration-audit-pack.js";
+import { ensureIdentity, getContact, renderIdentityBadge } from "../../shared/identity.js";
 
 let currentLanguage = localStorage.getItem("calculatorLanguage") || "en";
 let lastDownload = null;
@@ -35,13 +36,21 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function identityFields() {
+  const contact = getContact() || {};
+  return {
+    fullName: contact.fullName || "",
+    email: contact.email || "",
+    company: contact.company || "",
+    clientId: contact.clientId || ""
+  };
+}
+
 function getPayload() {
   const data = new FormData(form);
   return {
     language: currentLanguage,
-    fullName: data.get("fullName"),
-    email: data.get("email"),
-    company: data.get("company"),
+    ...identityFields(),
     role: data.get("role"),
     website: data.get("website"),
     companySize: data.get("companySize"),
@@ -177,6 +186,10 @@ async function submitForm(event) {
     return;
   }
 
+  const contact = await ensureIdentity({ source: "integration-audit-pack", language: currentLanguage });
+  if (!contact) return; // user dismissed the lead modal
+  renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });
+
   submitButton.disabled = true;
   submitLabel.textContent = t("form.loading");
 
@@ -237,3 +250,7 @@ headerMenu?.querySelectorAll("a").forEach((link) => {
 
 form.addEventListener("submit", submitForm);
 setLanguage(LANGUAGES.has(currentLanguage) ? currentLanguage : "en");
+
+// Badge shows only if the visitor is already known; the modal appears on demand
+// when they submit for the download.
+renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });

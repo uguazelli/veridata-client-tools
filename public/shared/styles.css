@@ -1301,3 +1301,156 @@ legend {
     padding-bottom: 28px;
   }
 }
+
+/* Shared identity / registration modal */
+body.identity-locked {
+  overflow: hidden;
+}
+
+.identity-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 31, 44, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.identity-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  box-shadow: var(--shadow-elevated);
+  padding: 28px;
+}
+
+.identity-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.identity-close:hover {
+  color: var(--text);
+}
+
+.identity-title {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+
+.identity-intro {
+  margin: 0 0 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.identity-field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.identity-field > span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.identity-field input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 9px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.identity-field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.identity-error {
+  margin: 0 0 12px;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.identity-submit {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 9px;
+  background: var(--cta);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.identity-submit:hover {
+  background: var(--cta-strong);
+}
+
+.identity-submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.identity-privacy {
+  margin: 14px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.identity-badge-row {
+  margin-bottom: 12px;
+}
+
+.identity-badge-row:empty {
+  margin-bottom: 0;
+}
+
+.identity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.identity-badge-text strong {
+  color: var(--text);
+}
+
+.identity-badge-reset {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.82rem;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,353 @@
+[
+  {
+    "input": {
+      "language": "en",
+      "systemsCount": "4-7",
+      "systemTypes": [
+        "odoo",
+        "crm"
+      ],
+      "manualCopyFrequency": "weekly",
+      "spreadsheetDependency": "low",
+      "apiAvailability": "most",
+      "sourceOfTruth": "clear",
+      "dataQuality": "clean",
+      "reportingConsistency": "consistent",
+      "integrationReliability": "reliable",
+      "systemOwnership": "clearOwners",
+      "upcomingMigration": "none",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 92,
+      "statusKey": "ready",
+      "status": "Integration Ready",
+      "categoryScores": {
+        "systemComplexity": 100,
+        "manualWork": 85,
+        "dataReadiness": 100,
+        "apiReadiness": 100,
+        "operationalRisk": 100
+      },
+      "painPoints": [],
+      "recommendation": "You appear ready to plan integration improvements. Start with a focused review of the highest-value workflows and API coverage."
+    }
+  },
+  {
+    "input": {
+      "language": "en",
+      "systemsCount": "13+",
+      "systemTypes": [
+        "odoo",
+        "crm",
+        "ecommerce",
+        "finance",
+        "spreadsheets"
+      ],
+      "manualCopyFrequency": "multipleDaily",
+      "spreadsheetDependency": "heavy",
+      "apiAvailability": "none",
+      "sourceOfTruth": "none",
+      "dataQuality": "poor",
+      "reportingConsistency": "differentTeams",
+      "integrationReliability": "manualFixes",
+      "systemOwnership": "noOwner",
+      "upcomingMigration": "activePoorReadiness",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 0,
+      "statusKey": "notReady",
+      "status": "Not Ready",
+      "categoryScores": {
+        "systemComplexity": 50,
+        "manualWork": 15,
+        "dataReadiness": 0,
+        "apiReadiness": 65,
+        "operationalRisk": 3
+      },
+      "painPoints": [
+        "Manual copying happens multiple times per day",
+        "Integrations require manual fixes",
+        "Heavy spreadsheet dependency",
+        "Core systems may not expose usable APIs",
+        "Teams do not share a trusted system of record"
+      ],
+      "recommendation": "Fix the foundation first: identify system owners, define the source of truth, reduce spreadsheet dependency, and clean critical data before integration projects."
+    }
+  },
+  {
+    "input": {
+      "language": "en",
+      "systemsCount": "8-12",
+      "systemTypes": [
+        "odoo",
+        "crm"
+      ],
+      "manualCopyFrequency": "daily",
+      "spreadsheetDependency": "medium",
+      "apiAvailability": "unknown",
+      "sourceOfTruth": "unclear",
+      "dataQuality": "inconsistent",
+      "reportingConsistency": "manualReports",
+      "integrationReliability": "oftenBreak",
+      "systemOwnership": "unclear",
+      "upcomingMigration": "plannedDataConcerns",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 0,
+      "statusKey": "notReady",
+      "status": "Not Ready",
+      "categoryScores": {
+        "systemComplexity": 75,
+        "manualWork": 35,
+        "dataReadiness": 21,
+        "apiReadiness": 57,
+        "operationalRisk": 37
+      },
+      "painPoints": [
+        "Daily manual data copying",
+        "Integrations break often",
+        "Reporting depends on manual work",
+        "API availability is unclear",
+        "No clear source of truth"
+      ],
+      "recommendation": "Fix the foundation first: identify system owners, define the source of truth, reduce spreadsheet dependency, and clean critical data before integration projects."
+    }
+  },
+  {
+    "input": {
+      "language": "pt",
+      "systemsCount": "4-7",
+      "systemTypes": [
+        "odoo",
+        "crm"
+      ],
+      "manualCopyFrequency": "weekly",
+      "spreadsheetDependency": "low",
+      "apiAvailability": "most",
+      "sourceOfTruth": "clear",
+      "dataQuality": "clean",
+      "reportingConsistency": "consistent",
+      "integrationReliability": "reliable",
+      "systemOwnership": "clearOwners",
+      "upcomingMigration": "none",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 92,
+      "statusKey": "ready",
+      "status": "Pronto para integração",
+      "categoryScores": {
+        "systemComplexity": 100,
+        "manualWork": 85,
+        "dataReadiness": 100,
+        "apiReadiness": 100,
+        "operationalRisk": 100
+      },
+      "painPoints": [],
+      "recommendation": "Você parece pronto para planejar melhorias de integração. Comece revisando os fluxos de maior valor e a cobertura de APIs."
+    }
+  },
+  {
+    "input": {
+      "language": "pt",
+      "systemsCount": "13+",
+      "systemTypes": [
+        "odoo",
+        "crm",
+        "ecommerce",
+        "finance",
+        "spreadsheets"
+      ],
+      "manualCopyFrequency": "multipleDaily",
+      "spreadsheetDependency": "heavy",
+      "apiAvailability": "none",
+      "sourceOfTruth": "none",
+      "dataQuality": "poor",
+      "reportingConsistency": "differentTeams",
+      "integrationReliability": "manualFixes",
+      "systemOwnership": "noOwner",
+      "upcomingMigration": "activePoorReadiness",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 0,
+      "statusKey": "notReady",
+      "status": "Não está pronto",
+      "categoryScores": {
+        "systemComplexity": 50,
+        "manualWork": 15,
+        "dataReadiness": 0,
+        "apiReadiness": 65,
+        "operationalRisk": 3
+      },
+      "painPoints": [
+        "Cópia manual acontece várias vezes ao dia",
+        "Integrações exigem correções manuais",
+        "Dependência alta de planilhas",
+        "Sistemas principais podem não ter APIs utilizáveis",
+        "As equipes não usam um sistema confiável como referência"
+      ],
+      "recommendation": "Arrume a base primeiro: defina responsáveis, fonte de verdade, reduza dependência de planilhas e limpe dados críticos antes de projetos de integração."
+    }
+  },
+  {
+    "input": {
+      "language": "pt",
+      "systemsCount": "8-12",
+      "systemTypes": [
+        "odoo",
+        "crm"
+      ],
+      "manualCopyFrequency": "daily",
+      "spreadsheetDependency": "medium",
+      "apiAvailability": "unknown",
+      "sourceOfTruth": "unclear",
+      "dataQuality": "inconsistent",
+      "reportingConsistency": "manualReports",
+      "integrationReliability": "oftenBreak",
+      "systemOwnership": "unclear",
+      "upcomingMigration": "plannedDataConcerns",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 0,
+      "statusKey": "notReady",
+      "status": "Não está pronto",
+      "categoryScores": {
+        "systemComplexity": 75,
+        "manualWork": 35,
+        "dataReadiness": 21,
+        "apiReadiness": 57,
+        "operationalRisk": 37
+      },
+      "painPoints": [
+        "Cópia manual de dados todos os dias",
+        "Integrações quebram com frequência",
+        "Relatórios dependem de trabalho manual",
+        "Não está claro se os sistemas têm APIs",
+        "Não há fonte única de verdade clara"
+      ],
+      "recommendation": "Arrume a base primeiro: defina responsáveis, fonte de verdade, reduza dependência de planilhas e limpe dados críticos antes de projetos de integração."
+    }
+  },
+  {
+    "input": {
+      "language": "es",
+      "systemsCount": "4-7",
+      "systemTypes": [
+        "odoo",
+        "crm"
+      ],
+      "manualCopyFrequency": "weekly",
+      "spreadsheetDependency": "low",
+      "apiAvailability": "most",
+      "sourceOfTruth": "clear",
+      "dataQuality": "clean",
+      "reportingConsistency": "consistent",
+      "integrationReliability": "reliable",
+      "systemOwnership": "clearOwners",
+      "upcomingMigration": "none",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 92,
+      "statusKey": "ready",
+      "status": "Listo para integración",
+      "categoryScores": {
+        "systemComplexity": 100,
+        "manualWork": 85,
+        "dataReadiness": 100,
+        "apiReadiness": 100,
+        "operationalRisk": 100
+      },
+      "painPoints": [],
+      "recommendation": "Parece que estás listo para planear mejoras de integración. Empieza revisando los flujos de mayor valor y la cobertura de APIs."
+    }
+  },
+  {
+    "input": {
+      "language": "es",
+      "systemsCount": "13+",
+      "systemTypes": [
+        "odoo",
+        "crm",
+        "ecommerce",
+        "finance",
+        "spreadsheets"
+      ],
+      "manualCopyFrequency": "multipleDaily",
+      "spreadsheetDependency": "heavy",
+      "apiAvailability": "none",
+      "sourceOfTruth": "none",
+      "dataQuality": "poor",
+      "reportingConsistency": "differentTeams",
+      "integrationReliability": "manualFixes",
+      "systemOwnership": "noOwner",
+      "upcomingMigration": "activePoorReadiness",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 0,
+      "statusKey": "notReady",
+      "status": "No está listo",
+      "categoryScores": {
+        "systemComplexity": 50,
+        "manualWork": 15,
+        "dataReadiness": 0,
+        "apiReadiness": 65,
+        "operationalRisk": 3
+      },
+      "painPoints": [
+        "La copia manual ocurre varias veces por día",
+        "Las integraciones requieren correcciones manuales",
+        "Alta dependencia de hojas de cálculo",
+        "Los sistemas principales podrían no tener APIs utilizables",
+        "Los equipos no comparten un sistema confiable como referencia"
+      ],
+      "recommendation": "Arregla la base primero: define responsables, fuente de verdad, reduce dependencia de hojas de cálculo y limpia datos críticos antes de proyectos de integración."
+    }
+  },
+  {
+    "input": {
+      "language": "es",
+      "systemsCount": "8-12",
+      "systemTypes": [
+        "odoo",
+        "crm"
+      ],
+      "manualCopyFrequency": "daily",
+      "spreadsheetDependency": "medium",
+      "apiAvailability": "unknown",
+      "sourceOfTruth": "unclear",
+      "dataQuality": "inconsistent",
+      "reportingConsistency": "manualReports",
+      "integrationReliability": "oftenBreak",
+      "systemOwnership": "unclear",
+      "upcomingMigration": "plannedDataConcerns",
+      "biggestProblem": "manual work"
+    },
+    "expected": {
+      "score": 0,
+      "statusKey": "notReady",
+      "status": "No está listo",
+      "categoryScores": {
+        "systemComplexity": 75,
+        "manualWork": 35,
+        "dataReadiness": 21,
+        "apiReadiness": 57,
+        "operationalRisk": 37
+      },
+      "painPoints": [
+        "Copia manual de datos todos los días",
+        "Las integraciones fallan con frecuencia",
+        "Los reportes dependen de trabajo manual",
+        "No está claro si los sistemas tienen APIs",
+        "No hay una fuente única de verdad clara"
+      ],
+      "recommendation": "Arregla la base primero: define responsables, fuente de verdad, reduce dependencia de hojas de cálculo y limpia datos críticos antes de proyectos de integración."
+    }
+  }
+]

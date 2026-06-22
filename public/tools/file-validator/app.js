@@ -24,6 +24,7 @@ const HTML_LANG = {
 };
 
 import { TRANSLATIONS } from "../../shared/translations/file-validator.js";
+import { ensureIdentity, renderIdentityBadge } from "../../shared/identity.js";
 
 let currentLanguage = localStorage.getItem("calculatorLanguage") || "en";
 let currentFile = null;
@@ -287,6 +288,11 @@ async function handleFile(file) {
     return;
   }
 
+  // Capture the lead once, the first time they actually analyze a file.
+  const contact = await ensureIdentity({ source: "file-validator", language: currentLanguage });
+  if (!contact) return; // user dismissed the lead modal
+  renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });
+
   try {
     clearError();
     currentFile = file;
@@ -375,3 +381,5 @@ headerMenu?.querySelectorAll("a").forEach((link) => {
 });
 
 setLanguage(LANGUAGES.has(currentLanguage) ? currentLanguage : "en");
+// Show the badge if the visitor is already known on this device.
+renderIdentityBadge(document.querySelector("[data-identity-badge]"), { language: currentLanguage });

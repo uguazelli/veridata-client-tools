@@ -1,0 +1,1091 @@
+[
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 12,
+      "sandboxCores": 4,
+      "runningApplications": 36,
+      "utilizationPct": 72,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "en"
+    },
+    "expected": {
+      "language": "en",
+      "risk": {
+        "score": 20,
+        "level": "Low",
+        "severity": "low"
+      },
+      "waste": {
+        "estimatedPercent": 21,
+        "message": "Capacity to review: 21% of allocated MuleSoft capacity may be idle or oversized. This is directional, not official pricing."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Flows/Messages package",
+        "renewalTimeline": "6-12 months",
+        "totalCores": 16,
+        "appsPerProductionCore": 3
+      },
+      "signals": [
+        {
+          "title": "Healthy utilization",
+          "severity": "low",
+          "message": "Average utilization is 72%, which suggests capacity is being used more actively. Renewal and deployment alignment should still be reviewed."
+        },
+        {
+          "title": "Apps per production core",
+          "severity": "low",
+          "message": "Your apps-per-capacity ratio does not show an obvious consolidation issue from these inputs."
+        },
+        {
+          "title": "Production vs. sandbox capacity",
+          "severity": "low",
+          "message": "Sandbox/pre-production allocation appears proportionate to production from this high-level view."
+        },
+        {
+          "title": "Pricing model clarity",
+          "severity": "medium",
+          "message": "Flows/Messages packaging still needs governance. Review whether deployed flows and message volumes match business value."
+        }
+      ],
+      "recommendations": [
+        "Export current Anypoint usage by environment and business group before renewal discussions.",
+        "Review worker sizes, replicas, and stopped/idle applications before buying additional capacity.",
+        "Compare production and pre-production allocation against release cadence and support needs.",
+        "Review MQ usage patterns separately from runtime capacity because messaging workloads often drive hidden operational cost."
+      ],
+      "cta": {
+        "headline": "Book a MuleSoft optimization audit with VeriDataPro",
+        "message": "A short audit can validate idle capacity, renewal exposure, and architecture alignment using your actual Anypoint data."
+      },
+      "disclaimer": "This tool provides directional optimization signals, not official MuleSoft pricing."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "unsure",
+      "productionCores": 12,
+      "sandboxCores": 4,
+      "runningApplications": 36,
+      "utilizationPct": 18,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "0-3",
+      "language": "en"
+    },
+    "expected": {
+      "language": "en",
+      "risk": {
+        "score": 78,
+        "level": "Critical",
+        "severity": "critical"
+      },
+      "waste": {
+        "estimatedPercent": 62,
+        "message": "Capacity to review: 62% of allocated MuleSoft capacity may be idle or oversized. This is directional, not official pricing."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Unsure",
+        "renewalTimeline": "0-3 months",
+        "totalCores": 16,
+        "appsPerProductionCore": 3
+      },
+      "signals": [
+        {
+          "title": "Low utilization",
+          "severity": "critical",
+          "message": "Average utilization is 18%, so some paid capacity may be idle or larger than the workloads need."
+        },
+        {
+          "title": "Apps per production core",
+          "severity": "low",
+          "message": "Your apps-per-capacity ratio does not show an obvious consolidation issue from these inputs."
+        },
+        {
+          "title": "Production vs. sandbox capacity",
+          "severity": "low",
+          "message": "Sandbox/pre-production allocation appears proportionate to production from this high-level view."
+        },
+        {
+          "title": "Pricing model clarity",
+          "severity": "high",
+          "message": "Your pricing model is unclear. That uncertainty is a renewal risk because MuleSoft customers may be on legacy core/vCore terms or newer Flows/Messages packages."
+        }
+      ],
+      "recommendations": [
+        "Run a focused renewal readiness review before your next Salesforce/MuleSoft commercial conversation.",
+        "Export current Anypoint usage by environment and business group before renewal discussions.",
+        "Review worker sizes, replicas, and stopped/idle applications before buying additional capacity.",
+        "Compare production and pre-production allocation against release cadence and support needs.",
+        "Review MQ usage patterns separately from runtime capacity because messaging workloads often drive hidden operational cost."
+      ],
+      "cta": {
+        "headline": "Book a MuleSoft optimization audit with VeriDataPro",
+        "message": "A short audit can validate idle capacity, renewal exposure, and architecture alignment using your actual Anypoint data."
+      },
+      "disclaimer": "This tool provides directional optimization signals, not official MuleSoft pricing."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 10,
+      "sandboxCores": 14,
+      "runningApplications": 12,
+      "utilizationPct": 55,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "en"
+    },
+    "expected": {
+      "language": "en",
+      "risk": {
+        "score": 52,
+        "level": "Medium",
+        "severity": "medium"
+      },
+      "waste": {
+        "estimatedPercent": 52,
+        "message": "Capacity to review: 52% of allocated MuleSoft capacity may be idle or oversized. This is directional, not official pricing."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Flows/Messages package",
+        "renewalTimeline": "6-12 months",
+        "totalCores": 24,
+        "appsPerProductionCore": 1.2
+      },
+      "signals": [
+        {
+          "title": "Moderate utilization",
+          "severity": "medium",
+          "message": "Average utilization is 55%. Review worker size, replicas, and environment allocation before buying more capacity."
+        },
+        {
+          "title": "Apps per production core",
+          "severity": "high",
+          "message": "You are running about 1.2 applications per production core/vCore. That can point to over-allocation or consolidation opportunity."
+        },
+        {
+          "title": "Production vs. sandbox capacity",
+          "severity": "high",
+          "message": "Sandbox/pre-production capacity is higher than production. That is a common place to find capacity cleanup opportunities."
+        },
+        {
+          "title": "Pricing model clarity",
+          "severity": "medium",
+          "message": "Flows/Messages packaging still needs governance. Review whether deployed flows and message volumes match business value."
+        }
+      ],
+      "recommendations": [
+        "Export current Anypoint usage by environment and business group before renewal discussions.",
+        "Review worker sizes, replicas, and stopped/idle applications before buying additional capacity.",
+        "Compare production and pre-production allocation against release cadence and support needs.",
+        "Review MQ usage patterns separately from runtime capacity because messaging workloads often drive hidden operational cost."
+      ],
+      "cta": {
+        "headline": "Book a MuleSoft optimization audit with VeriDataPro",
+        "message": "A short audit can validate idle capacity, renewal exposure, and architecture alignment using your actual Anypoint data."
+      },
+      "disclaimer": "This tool provides directional optimization signals, not official MuleSoft pricing."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "hybrid",
+      "commercialModel": "flowMessage",
+      "productionCores": 2,
+      "sandboxCores": 4,
+      "runningApplications": 30,
+      "utilizationPct": 90,
+      "managedApis": 120,
+      "addons": [
+        "apiManager",
+        "mq",
+        "objectStore",
+        "monitoring"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "en"
+    },
+    "expected": {
+      "language": "en",
+      "risk": {
+        "score": 43,
+        "level": "Medium",
+        "severity": "medium"
+      },
+      "waste": {
+        "estimatedPercent": 18,
+        "message": "Capacity to review: 18% of allocated MuleSoft capacity may be idle or oversized. This is directional, not official pricing."
+      },
+      "footprint": {
+        "deploymentModel": "Hybrid",
+        "commercialModel": "Flows/Messages package",
+        "renewalTimeline": "6-12 months",
+        "totalCores": 6,
+        "appsPerProductionCore": 15
+      },
+      "signals": [
+        {
+          "title": "Healthy utilization",
+          "severity": "low",
+          "message": "Average utilization is 90%, which suggests capacity is being used more actively. Renewal and deployment alignment should still be reviewed."
+        },
+        {
+          "title": "Apps per production core",
+          "severity": "medium",
+          "message": "You are running about 15.0 applications per production core/vCore, so resilience and isolation should be checked before reducing capacity."
+        },
+        {
+          "title": "Production vs. sandbox capacity",
+          "severity": "high",
+          "message": "Sandbox/pre-production capacity is higher than production. That is a common place to find capacity cleanup opportunities."
+        },
+        {
+          "title": "Pricing model clarity",
+          "severity": "medium",
+          "message": "Flows/Messages packaging still needs governance. Review whether deployed flows and message volumes match business value."
+        }
+      ],
+      "recommendations": [
+        "Export current Anypoint usage by environment and business group before renewal discussions.",
+        "Review worker sizes, replicas, and stopped/idle applications before buying additional capacity.",
+        "Compare production and pre-production allocation against release cadence and support needs.",
+        "Review MQ usage patterns separately from runtime capacity because messaging workloads often drive hidden operational cost."
+      ],
+      "cta": {
+        "headline": "Book a MuleSoft optimization audit with VeriDataPro",
+        "message": "A short audit can validate idle capacity, renewal exposure, and architecture alignment using your actual Anypoint data."
+      },
+      "disclaimer": "This tool provides directional optimization signals, not official MuleSoft pricing."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 0,
+      "sandboxCores": 3,
+      "runningApplications": 5,
+      "utilizationPct": 72,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "en"
+    },
+    "expected": {
+      "language": "en",
+      "risk": {
+        "score": 28,
+        "level": "Low",
+        "severity": "low"
+      },
+      "waste": {
+        "estimatedPercent": 31,
+        "message": "Capacity to review: 31% of allocated MuleSoft capacity may be idle or oversized. This is directional, not official pricing."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Flows/Messages package",
+        "renewalTimeline": "6-12 months",
+        "totalCores": 3,
+        "appsPerProductionCore": 0
+      },
+      "signals": [
+        {
+          "title": "Healthy utilization",
+          "severity": "low",
+          "message": "Average utilization is 72%, which suggests capacity is being used more actively. Renewal and deployment alignment should still be reviewed."
+        },
+        {
+          "title": "Apps per production core",
+          "severity": "low",
+          "message": "Your apps-per-capacity ratio does not show an obvious consolidation issue from these inputs."
+        },
+        {
+          "title": "Production vs. sandbox capacity",
+          "severity": "high",
+          "message": "Sandbox/pre-production capacity is higher than production. That is a common place to find capacity cleanup opportunities."
+        },
+        {
+          "title": "Pricing model clarity",
+          "severity": "medium",
+          "message": "Flows/Messages packaging still needs governance. Review whether deployed flows and message volumes match business value."
+        }
+      ],
+      "recommendations": [
+        "Export current Anypoint usage by environment and business group before renewal discussions.",
+        "Review worker sizes, replicas, and stopped/idle applications before buying additional capacity.",
+        "Compare production and pre-production allocation against release cadence and support needs.",
+        "Review MQ usage patterns separately from runtime capacity because messaging workloads often drive hidden operational cost."
+      ],
+      "cta": {
+        "headline": "Book a MuleSoft optimization audit with VeriDataPro",
+        "message": "A short audit can validate idle capacity, renewal exposure, and architecture alignment using your actual Anypoint data."
+      },
+      "disclaimer": "This tool provides directional optimization signals, not official MuleSoft pricing."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 12,
+      "sandboxCores": 4,
+      "runningApplications": 36,
+      "utilizationPct": 72,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "pt"
+    },
+    "expected": {
+      "language": "pt",
+      "risk": {
+        "score": 20,
+        "level": "Baixo",
+        "severity": "low"
+      },
+      "waste": {
+        "estimatedPercent": 21,
+        "message": "Capacidade a revisar: 21% da capacidade MuleSoft alocada pode estar ociosa ou acima do necessário. Este é um sinal direcional, não preço oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Pacote por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 16,
+        "appsPerProductionCore": 3
+      },
+      "signals": [
+        {
+          "title": "Utilização saudável",
+          "severity": "low",
+          "message": "A utilização média é 72%, o que sugere uso mais ativo da capacidade. A adequação da implantação e da renovação ainda deve ser revisada."
+        },
+        {
+          "title": "Aplicações por core de produção",
+          "severity": "low",
+          "message": "A relação entre aplicações e capacidade não mostra um problema óbvio de consolidação com estes dados."
+        },
+        {
+          "title": "Produção vs. sandbox",
+          "severity": "low",
+          "message": "A alocação de sandbox/pré-produção parece proporcional à produção nesta visão de alto nível."
+        },
+        {
+          "title": "Clareza do modelo comercial",
+          "severity": "medium",
+          "message": "Pacotes por Flows/Messages também exigem governança. Revise se flows implantados e volumes de mensagens acompanham valor de negócio."
+        }
+      ],
+      "recommendations": [
+        "Exporte o uso atual do Anypoint por ambiente e business group antes da renovação.",
+        "Revise tamanhos de workers, réplicas e aplicações paradas/ociosas antes de comprar capacidade adicional.",
+        "Compare a alocação de produção e pré-produção com a cadência de releases e necessidades de suporte.",
+        "Revise o uso de MQ separadamente da capacidade de runtime, porque workloads de mensageria costumam gerar custo operacional oculto."
+      ],
+      "cta": {
+        "headline": "Agende uma auditoria de otimização MuleSoft com a VeriDataPro",
+        "message": "Uma auditoria curta pode validar capacidade ociosa, risco na renovação e adequação da arquitetura usando seus dados reais do Anypoint."
+      },
+      "disclaimer": "Esta ferramenta fornece sinais direcionais de otimização, não preços oficiais do MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "unsure",
+      "productionCores": 12,
+      "sandboxCores": 4,
+      "runningApplications": 36,
+      "utilizationPct": 18,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "0-3",
+      "language": "pt"
+    },
+    "expected": {
+      "language": "pt",
+      "risk": {
+        "score": 78,
+        "level": "Crítico",
+        "severity": "critical"
+      },
+      "waste": {
+        "estimatedPercent": 62,
+        "message": "Capacidade a revisar: 62% da capacidade MuleSoft alocada pode estar ociosa ou acima do necessário. Este é um sinal direcional, não preço oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Não sei",
+        "renewalTimeline": "0-3 meses",
+        "totalCores": 16,
+        "appsPerProductionCore": 3
+      },
+      "signals": [
+        {
+          "title": "Baixa utilização",
+          "severity": "critical",
+          "message": "A utilização média é 18%, então parte da capacidade paga pode estar ociosa ou acima do necessário."
+        },
+        {
+          "title": "Aplicações por core de produção",
+          "severity": "low",
+          "message": "A relação entre aplicações e capacidade não mostra um problema óbvio de consolidação com estes dados."
+        },
+        {
+          "title": "Produção vs. sandbox",
+          "severity": "low",
+          "message": "A alocação de sandbox/pré-produção parece proporcional à produção nesta visão de alto nível."
+        },
+        {
+          "title": "Clareza do modelo comercial",
+          "severity": "high",
+          "message": "Seu modelo comercial não está claro. Essa incerteza já é um risco de renovação, pois clientes MuleSoft podem estar em contratos legados core/vCore ou pacotes por Flows/Messages."
+        }
+      ],
+      "recommendations": [
+        "Faça uma revisão focada de prontidão para renovação antes da próxima conversa comercial Salesforce/MuleSoft.",
+        "Exporte o uso atual do Anypoint por ambiente e business group antes da renovação.",
+        "Revise tamanhos de workers, réplicas e aplicações paradas/ociosas antes de comprar capacidade adicional.",
+        "Compare a alocação de produção e pré-produção com a cadência de releases e necessidades de suporte.",
+        "Revise o uso de MQ separadamente da capacidade de runtime, porque workloads de mensageria costumam gerar custo operacional oculto."
+      ],
+      "cta": {
+        "headline": "Agende uma auditoria de otimização MuleSoft com a VeriDataPro",
+        "message": "Uma auditoria curta pode validar capacidade ociosa, risco na renovação e adequação da arquitetura usando seus dados reais do Anypoint."
+      },
+      "disclaimer": "Esta ferramenta fornece sinais direcionais de otimização, não preços oficiais do MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 10,
+      "sandboxCores": 14,
+      "runningApplications": 12,
+      "utilizationPct": 55,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "pt"
+    },
+    "expected": {
+      "language": "pt",
+      "risk": {
+        "score": 52,
+        "level": "Médio",
+        "severity": "medium"
+      },
+      "waste": {
+        "estimatedPercent": 52,
+        "message": "Capacidade a revisar: 52% da capacidade MuleSoft alocada pode estar ociosa ou acima do necessário. Este é um sinal direcional, não preço oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Pacote por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 24,
+        "appsPerProductionCore": 1.2
+      },
+      "signals": [
+        {
+          "title": "Utilização moderada",
+          "severity": "medium",
+          "message": "A utilização média é 55%. Revise tamanho de workers, réplicas e alocação por ambiente antes de comprar mais capacidade."
+        },
+        {
+          "title": "Aplicações por core de produção",
+          "severity": "high",
+          "message": "Você executa cerca de 1.2 aplicações por core/vCore de produção. Isso pode indicar sobrealocação ou oportunidade de consolidação."
+        },
+        {
+          "title": "Produção vs. sandbox",
+          "severity": "high",
+          "message": "A capacidade de sandbox/pré-produção está acima da produção. Esse costuma ser um ponto claro para reduzir capacidade mal alocada."
+        },
+        {
+          "title": "Clareza do modelo comercial",
+          "severity": "medium",
+          "message": "Pacotes por Flows/Messages também exigem governança. Revise se flows implantados e volumes de mensagens acompanham valor de negócio."
+        }
+      ],
+      "recommendations": [
+        "Exporte o uso atual do Anypoint por ambiente e business group antes da renovação.",
+        "Revise tamanhos de workers, réplicas e aplicações paradas/ociosas antes de comprar capacidade adicional.",
+        "Compare a alocação de produção e pré-produção com a cadência de releases e necessidades de suporte.",
+        "Revise o uso de MQ separadamente da capacidade de runtime, porque workloads de mensageria costumam gerar custo operacional oculto."
+      ],
+      "cta": {
+        "headline": "Agende uma auditoria de otimização MuleSoft com a VeriDataPro",
+        "message": "Uma auditoria curta pode validar capacidade ociosa, risco na renovação e adequação da arquitetura usando seus dados reais do Anypoint."
+      },
+      "disclaimer": "Esta ferramenta fornece sinais direcionais de otimização, não preços oficiais do MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "hybrid",
+      "commercialModel": "flowMessage",
+      "productionCores": 2,
+      "sandboxCores": 4,
+      "runningApplications": 30,
+      "utilizationPct": 90,
+      "managedApis": 120,
+      "addons": [
+        "apiManager",
+        "mq",
+        "objectStore",
+        "monitoring"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "pt"
+    },
+    "expected": {
+      "language": "pt",
+      "risk": {
+        "score": 43,
+        "level": "Médio",
+        "severity": "medium"
+      },
+      "waste": {
+        "estimatedPercent": 18,
+        "message": "Capacidade a revisar: 18% da capacidade MuleSoft alocada pode estar ociosa ou acima do necessário. Este é um sinal direcional, não preço oficial."
+      },
+      "footprint": {
+        "deploymentModel": "Híbrido",
+        "commercialModel": "Pacote por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 6,
+        "appsPerProductionCore": 15
+      },
+      "signals": [
+        {
+          "title": "Utilização saudável",
+          "severity": "low",
+          "message": "A utilização média é 90%, o que sugere uso mais ativo da capacidade. A adequação da implantação e da renovação ainda deve ser revisada."
+        },
+        {
+          "title": "Aplicações por core de produção",
+          "severity": "medium",
+          "message": "Você executa cerca de 15.0 aplicações por core/vCore de produção; por isso, resiliência e isolamento devem ser avaliados antes de reduzir capacidade."
+        },
+        {
+          "title": "Produção vs. sandbox",
+          "severity": "high",
+          "message": "A capacidade de sandbox/pré-produção está acima da produção. Esse costuma ser um ponto claro para reduzir capacidade mal alocada."
+        },
+        {
+          "title": "Clareza do modelo comercial",
+          "severity": "medium",
+          "message": "Pacotes por Flows/Messages também exigem governança. Revise se flows implantados e volumes de mensagens acompanham valor de negócio."
+        }
+      ],
+      "recommendations": [
+        "Exporte o uso atual do Anypoint por ambiente e business group antes da renovação.",
+        "Revise tamanhos de workers, réplicas e aplicações paradas/ociosas antes de comprar capacidade adicional.",
+        "Compare a alocação de produção e pré-produção com a cadência de releases e necessidades de suporte.",
+        "Revise o uso de MQ separadamente da capacidade de runtime, porque workloads de mensageria costumam gerar custo operacional oculto."
+      ],
+      "cta": {
+        "headline": "Agende uma auditoria de otimização MuleSoft com a VeriDataPro",
+        "message": "Uma auditoria curta pode validar capacidade ociosa, risco na renovação e adequação da arquitetura usando seus dados reais do Anypoint."
+      },
+      "disclaimer": "Esta ferramenta fornece sinais direcionais de otimização, não preços oficiais do MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 0,
+      "sandboxCores": 3,
+      "runningApplications": 5,
+      "utilizationPct": 72,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "pt"
+    },
+    "expected": {
+      "language": "pt",
+      "risk": {
+        "score": 28,
+        "level": "Baixo",
+        "severity": "low"
+      },
+      "waste": {
+        "estimatedPercent": 31,
+        "message": "Capacidade a revisar: 31% da capacidade MuleSoft alocada pode estar ociosa ou acima do necessário. Este é um sinal direcional, não preço oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Pacote por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 3,
+        "appsPerProductionCore": 0
+      },
+      "signals": [
+        {
+          "title": "Utilização saudável",
+          "severity": "low",
+          "message": "A utilização média é 72%, o que sugere uso mais ativo da capacidade. A adequação da implantação e da renovação ainda deve ser revisada."
+        },
+        {
+          "title": "Aplicações por core de produção",
+          "severity": "low",
+          "message": "A relação entre aplicações e capacidade não mostra um problema óbvio de consolidação com estes dados."
+        },
+        {
+          "title": "Produção vs. sandbox",
+          "severity": "high",
+          "message": "A capacidade de sandbox/pré-produção está acima da produção. Esse costuma ser um ponto claro para reduzir capacidade mal alocada."
+        },
+        {
+          "title": "Clareza do modelo comercial",
+          "severity": "medium",
+          "message": "Pacotes por Flows/Messages também exigem governança. Revise se flows implantados e volumes de mensagens acompanham valor de negócio."
+        }
+      ],
+      "recommendations": [
+        "Exporte o uso atual do Anypoint por ambiente e business group antes da renovação.",
+        "Revise tamanhos de workers, réplicas e aplicações paradas/ociosas antes de comprar capacidade adicional.",
+        "Compare a alocação de produção e pré-produção com a cadência de releases e necessidades de suporte.",
+        "Revise o uso de MQ separadamente da capacidade de runtime, porque workloads de mensageria costumam gerar custo operacional oculto."
+      ],
+      "cta": {
+        "headline": "Agende uma auditoria de otimização MuleSoft com a VeriDataPro",
+        "message": "Uma auditoria curta pode validar capacidade ociosa, risco na renovação e adequação da arquitetura usando seus dados reais do Anypoint."
+      },
+      "disclaimer": "Esta ferramenta fornece sinais direcionais de otimização, não preços oficiais do MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 12,
+      "sandboxCores": 4,
+      "runningApplications": 36,
+      "utilizationPct": 72,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "es"
+    },
+    "expected": {
+      "language": "es",
+      "risk": {
+        "score": 20,
+        "level": "Bajo",
+        "severity": "low"
+      },
+      "waste": {
+        "estimatedPercent": 21,
+        "message": "Capacidad a revisar: 21% de la capacidad MuleSoft asignada podría estar ociosa o sobredimensionada. Esta es una señal direccional, no precio oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Paquete por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 16,
+        "appsPerProductionCore": 3
+      },
+      "signals": [
+        {
+          "title": "Utilización saludable",
+          "severity": "low",
+          "message": "La utilización promedio es 72%, lo que sugiere un uso más activo de la capacidad. El ajuste de despliegue y renovación aún debe revisarse."
+        },
+        {
+          "title": "Aplicaciones por core de producción",
+          "severity": "low",
+          "message": "La relación entre aplicaciones y capacidad no muestra un problema obvio de consolidación con estos datos."
+        },
+        {
+          "title": "Producción vs. sandbox",
+          "severity": "low",
+          "message": "La asignación de sandbox/pre-producción parece proporcional a producción en esta vista de alto nivel."
+        },
+        {
+          "title": "Claridad del modelo comercial",
+          "severity": "medium",
+          "message": "Los paquetes por Flows/Messages también necesitan gobernanza. Revisa si los flows desplegados y los volúmenes de mensajes se alinean con el valor de negocio."
+        }
+      ],
+      "recommendations": [
+        "Exporta el uso actual de Anypoint por ambiente y business group antes de renovar.",
+        "Revisa tamaños de workers, réplicas y aplicaciones detenidas/ociosas antes de comprar capacidad adicional.",
+        "Compara la asignación de producción y pre-producción con la cadencia de releases y necesidades de soporte.",
+        "Revisa el uso de MQ por separado de la capacidad de runtime, porque las cargas de mensajería suelen generar costo operativo oculto."
+      ],
+      "cta": {
+        "headline": "Agenda una auditoría de optimización MuleSoft con VeriDataPro",
+        "message": "Una auditoría corta puede validar capacidad ociosa, riesgo de renovación y ajuste de arquitectura usando tus datos reales de Anypoint."
+      },
+      "disclaimer": "Esta herramienta entrega señales direccionales de optimización, no precios oficiales de MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "unsure",
+      "productionCores": 12,
+      "sandboxCores": 4,
+      "runningApplications": 36,
+      "utilizationPct": 18,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "0-3",
+      "language": "es"
+    },
+    "expected": {
+      "language": "es",
+      "risk": {
+        "score": 78,
+        "level": "Crítico",
+        "severity": "critical"
+      },
+      "waste": {
+        "estimatedPercent": 62,
+        "message": "Capacidad a revisar: 62% de la capacidad MuleSoft asignada podría estar ociosa o sobredimensionada. Esta es una señal direccional, no precio oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "No sé",
+        "renewalTimeline": "0-3 meses",
+        "totalCores": 16,
+        "appsPerProductionCore": 3
+      },
+      "signals": [
+        {
+          "title": "Baja utilización",
+          "severity": "critical",
+          "message": "La utilización promedio es 18%, por lo que parte de la capacidad pagada podría estar ociosa o sobredimensionada."
+        },
+        {
+          "title": "Aplicaciones por core de producción",
+          "severity": "low",
+          "message": "La relación entre aplicaciones y capacidad no muestra un problema obvio de consolidación con estos datos."
+        },
+        {
+          "title": "Producción vs. sandbox",
+          "severity": "low",
+          "message": "La asignación de sandbox/pre-producción parece proporcional a producción en esta vista de alto nivel."
+        },
+        {
+          "title": "Claridad del modelo comercial",
+          "severity": "high",
+          "message": "Tu modelo comercial no está claro. Esa incertidumbre ya es un riesgo de renovación porque clientes MuleSoft pueden estar en contratos heredados core/vCore o paquetes por Flows/Messages."
+        }
+      ],
+      "recommendations": [
+        "Ejecuta una revisión enfocada de preparación para renovación antes de tu próxima conversación comercial Salesforce/MuleSoft.",
+        "Exporta el uso actual de Anypoint por ambiente y business group antes de renovar.",
+        "Revisa tamaños de workers, réplicas y aplicaciones detenidas/ociosas antes de comprar capacidad adicional.",
+        "Compara la asignación de producción y pre-producción con la cadencia de releases y necesidades de soporte.",
+        "Revisa el uso de MQ por separado de la capacidad de runtime, porque las cargas de mensajería suelen generar costo operativo oculto."
+      ],
+      "cta": {
+        "headline": "Agenda una auditoría de optimización MuleSoft con VeriDataPro",
+        "message": "Una auditoría corta puede validar capacidad ociosa, riesgo de renovación y ajuste de arquitectura usando tus datos reales de Anypoint."
+      },
+      "disclaimer": "Esta herramienta entrega señales direccionales de optimización, no precios oficiales de MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 10,
+      "sandboxCores": 14,
+      "runningApplications": 12,
+      "utilizationPct": 55,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "es"
+    },
+    "expected": {
+      "language": "es",
+      "risk": {
+        "score": 52,
+        "level": "Medio",
+        "severity": "medium"
+      },
+      "waste": {
+        "estimatedPercent": 52,
+        "message": "Capacidad a revisar: 52% de la capacidad MuleSoft asignada podría estar ociosa o sobredimensionada. Esta es una señal direccional, no precio oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Paquete por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 24,
+        "appsPerProductionCore": 1.2
+      },
+      "signals": [
+        {
+          "title": "Utilización moderada",
+          "severity": "medium",
+          "message": "La utilización promedio es 55%. Revisa tamaño de workers, réplicas y asignación por ambiente antes de comprar más capacidad."
+        },
+        {
+          "title": "Aplicaciones por core de producción",
+          "severity": "high",
+          "message": "Estás ejecutando cerca de 1.2 aplicaciones por core/vCore de producción. Eso puede indicar sobreasignación u oportunidad de consolidación."
+        },
+        {
+          "title": "Producción vs. sandbox",
+          "severity": "high",
+          "message": "La capacidad de sandbox/pre-producción es mayor que producción. Suele ser un punto claro para reducir capacidad mal asignada."
+        },
+        {
+          "title": "Claridad del modelo comercial",
+          "severity": "medium",
+          "message": "Los paquetes por Flows/Messages también necesitan gobernanza. Revisa si los flows desplegados y los volúmenes de mensajes se alinean con el valor de negocio."
+        }
+      ],
+      "recommendations": [
+        "Exporta el uso actual de Anypoint por ambiente y business group antes de renovar.",
+        "Revisa tamaños de workers, réplicas y aplicaciones detenidas/ociosas antes de comprar capacidad adicional.",
+        "Compara la asignación de producción y pre-producción con la cadencia de releases y necesidades de soporte.",
+        "Revisa el uso de MQ por separado de la capacidad de runtime, porque las cargas de mensajería suelen generar costo operativo oculto."
+      ],
+      "cta": {
+        "headline": "Agenda una auditoría de optimización MuleSoft con VeriDataPro",
+        "message": "Una auditoría corta puede validar capacidad ociosa, riesgo de renovación y ajuste de arquitectura usando tus datos reales de Anypoint."
+      },
+      "disclaimer": "Esta herramienta entrega señales direccionales de optimización, no precios oficiales de MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "hybrid",
+      "commercialModel": "flowMessage",
+      "productionCores": 2,
+      "sandboxCores": 4,
+      "runningApplications": 30,
+      "utilizationPct": 90,
+      "managedApis": 120,
+      "addons": [
+        "apiManager",
+        "mq",
+        "objectStore",
+        "monitoring"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "es"
+    },
+    "expected": {
+      "language": "es",
+      "risk": {
+        "score": 43,
+        "level": "Medio",
+        "severity": "medium"
+      },
+      "waste": {
+        "estimatedPercent": 18,
+        "message": "Capacidad a revisar: 18% de la capacidad MuleSoft asignada podría estar ociosa o sobredimensionada. Esta es una señal direccional, no precio oficial."
+      },
+      "footprint": {
+        "deploymentModel": "Híbrido",
+        "commercialModel": "Paquete por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 6,
+        "appsPerProductionCore": 15
+      },
+      "signals": [
+        {
+          "title": "Utilización saludable",
+          "severity": "low",
+          "message": "La utilización promedio es 90%, lo que sugiere un uso más activo de la capacidad. El ajuste de despliegue y renovación aún debe revisarse."
+        },
+        {
+          "title": "Aplicaciones por core de producción",
+          "severity": "medium",
+          "message": "Estás ejecutando cerca de 15.0 aplicaciones por core/vCore de producción; por eso, resiliencia y aislamiento deben revisarse antes de reducir capacidad."
+        },
+        {
+          "title": "Producción vs. sandbox",
+          "severity": "high",
+          "message": "La capacidad de sandbox/pre-producción es mayor que producción. Suele ser un punto claro para reducir capacidad mal asignada."
+        },
+        {
+          "title": "Claridad del modelo comercial",
+          "severity": "medium",
+          "message": "Los paquetes por Flows/Messages también necesitan gobernanza. Revisa si los flows desplegados y los volúmenes de mensajes se alinean con el valor de negocio."
+        }
+      ],
+      "recommendations": [
+        "Exporta el uso actual de Anypoint por ambiente y business group antes de renovar.",
+        "Revisa tamaños de workers, réplicas y aplicaciones detenidas/ociosas antes de comprar capacidad adicional.",
+        "Compara la asignación de producción y pre-producción con la cadencia de releases y necesidades de soporte.",
+        "Revisa el uso de MQ por separado de la capacidad de runtime, porque las cargas de mensajería suelen generar costo operativo oculto."
+      ],
+      "cta": {
+        "headline": "Agenda una auditoría de optimización MuleSoft con VeriDataPro",
+        "message": "Una auditoría corta puede validar capacidad ociosa, riesgo de renovación y ajuste de arquitectura usando tus datos reales de Anypoint."
+      },
+      "disclaimer": "Esta herramienta entrega señales direccionales de optimización, no precios oficiales de MuleSoft."
+    }
+  },
+  {
+    "input": {
+      "fullName": "Alex Rivera",
+      "email": "alex@example.com",
+      "company": "Example Co",
+      "deploymentModel": "cloudhub2",
+      "commercialModel": "flowMessage",
+      "productionCores": 0,
+      "sandboxCores": 3,
+      "runningApplications": 5,
+      "utilizationPct": 72,
+      "managedApis": 25,
+      "addons": [
+        "apiManager",
+        "mq"
+      ],
+      "renewalTimeline": "6-12",
+      "language": "es"
+    },
+    "expected": {
+      "language": "es",
+      "risk": {
+        "score": 28,
+        "level": "Bajo",
+        "severity": "low"
+      },
+      "waste": {
+        "estimatedPercent": 31,
+        "message": "Capacidad a revisar: 31% de la capacidad MuleSoft asignada podría estar ociosa o sobredimensionada. Esta es una señal direccional, no precio oficial."
+      },
+      "footprint": {
+        "deploymentModel": "CloudHub 2.0",
+        "commercialModel": "Paquete por Flows/Messages",
+        "renewalTimeline": "6-12 meses",
+        "totalCores": 3,
+        "appsPerProductionCore": 0
+      },
+      "signals": [
+        {
+          "title": "Utilización saludable",
+          "severity": "low",
+          "message": "La utilización promedio es 72%, lo que sugiere un uso más activo de la capacidad. El ajuste de despliegue y renovación aún debe revisarse."
+        },
+        {
+          "title": "Aplicaciones por core de producción",
+          "severity": "low",
+          "message": "La relación entre aplicaciones y capacidad no muestra un problema obvio de consolidación con estos datos."
+        },
+        {
+          "title": "Producción vs. sandbox",
+          "severity": "high",
+          "message": "La capacidad de sandbox/pre-producción es mayor que producción. Suele ser un punto claro para reducir capacidad mal asignada."
+        },
+        {
+          "title": "Claridad del modelo comercial",
+          "severity": "medium",
+          "message": "Los paquetes por Flows/Messages también necesitan gobernanza. Revisa si los flows desplegados y los volúmenes de mensajes se alinean con el valor de negocio."
+        }
+      ],
+      "recommendations": [
+        "Exporta el uso actual de Anypoint por ambiente y business group antes de renovar.",
+        "Revisa tamaños de workers, réplicas y aplicaciones detenidas/ociosas antes de comprar capacidad adicional.",
+        "Compara la asignación de producción y pre-producción con la cadencia de releases y necesidades de soporte.",
+        "Revisa el uso de MQ por separado de la capacidad de runtime, porque las cargas de mensajería suelen generar costo operativo oculto."
+      ],
+      "cta": {
+        "headline": "Agenda una auditoría de optimización MuleSoft con VeriDataPro",
+        "message": "Una auditoría corta puede validar capacidad ociosa, riesgo de renovación y ajuste de arquitectura usando tus datos reales de Anypoint."
+      },
+      "disclaimer": "Esta herramienta entrega señales direccionales de optimización, no precios oficiales de MuleSoft."
+    }
+  }
+]

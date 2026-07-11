@@ -75,6 +75,24 @@ CREATE TABLE IF NOT EXISTS integration_audit_leads (
     download_file     TEXT,
     user_agent        TEXT
 );
+
+CREATE TABLE IF NOT EXISTS mulesoft_aws_migration_leads (
+    email               TEXT PRIMARY KEY,
+    created_at          TEXT NOT NULL,
+    updated_at          TEXT NOT NULL,
+    language            TEXT,
+    full_name           TEXT,
+    company             TEXT,
+    role                TEXT,
+    website             TEXT,
+    company_size        TEXT,
+    timeline            TEXT,
+    primary_challenge   TEXT,
+    mule_applications   INTEGER,
+    target_aws_services TEXT,
+    download_file       TEXT,
+    user_agent          TEXT
+);
 """
 
 

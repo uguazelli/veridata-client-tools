@@ -45,7 +45,7 @@ def test_missing_company_size_returns_400(client):
 def test_index_pages_render_with_base_path(client):
     # Every tool's index serves and injects its base path (no leftover token).
     for path in ["/mulesoft-calculator/", "/api-readiness-assessment/", "/file-validator/",
-                 "/integration-audit-pack/", "/odoo-integration-complexity-mapper/", "/docs/"]:
+                 "/integration-audit-pack/", "/mulesoft-to-aws-migration/", "/odoo-integration-complexity-mapper/", "/docs/"]:
         res = client.get(path)
         assert res.status_code == 200, path
         assert "__BASE_PATH__" not in res.text, path

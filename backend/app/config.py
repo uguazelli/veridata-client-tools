@@ -26,6 +26,7 @@ class Settings:
     api_readiness_base = normalize_base_path(os.environ.get("API_READINESS_BASE_PATH", "/api-readiness-assessment"))
     file_validator_base = normalize_base_path(os.environ.get("FILE_VALIDATOR_BASE_PATH", "/file-validator"))
     integration_audit_base = normalize_base_path(os.environ.get("INTEGRATION_AUDIT_PACK_BASE_PATH", "/integration-audit-pack"))
+    mulesoft_to_aws_migration_base = normalize_base_path(os.environ.get("MULESOFT_TO_AWS_MIGRATION_BASE_PATH", "/mulesoft-to-aws-migration"))
     odoo_base = normalize_base_path(os.environ.get("ODOO_COMPLEXITY_MAPPER_BASE_PATH", "/odoo-integration-complexity-mapper"))
     db_path = Path(os.environ.get("DB_PATH", DATA_DIR / "app.db"))
 

@@ -12,6 +12,7 @@ from .tools.api_readiness.router import build_router as build_api_readiness_rout
 from .tools.contact.router import router as contact_router
 from .tools.integration_audit.router import build_router as build_integration_audit_router
 from .tools.mulesoft.router import build_router as build_mulesoft_router
+from .tools.mulesoft_to_aws_migration.router import build_router as build_mulesoft_to_aws_migration_router
 
 logger = logging.getLogger("veridatapro")
 
@@ -22,6 +23,7 @@ STATIC_TOOLS = [
     ("api_readiness_base", "tools/api-readiness/index.html"),
     ("file_validator_base", "tools/file-validator/index.html"),
     ("integration_audit_base", "tools/integration-audit-pack/index.html"),
+    ("mulesoft_to_aws_migration_base", "tools/mulesoft-to-aws-migration/index.html"),
     ("odoo_base", "tools/odoo-complexity-mapper/index.html"),
 ]
 
@@ -79,6 +81,7 @@ def create_app() -> FastAPI:
     app.include_router(build_mulesoft_router(settings.mulesoft_base))
     app.include_router(build_api_readiness_router(settings.api_readiness_base))
     app.include_router(build_integration_audit_router(settings.integration_audit_base))
+    app.include_router(build_mulesoft_to_aws_migration_router(settings.mulesoft_to_aws_migration_base))
 
     # Static + templated index for every tool.
     for setting_name, html_rel_path in STATIC_TOOLS:

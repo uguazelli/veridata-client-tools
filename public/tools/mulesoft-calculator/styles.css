@@ -1,0 +1,354 @@
+/* MuleSoft Calculator UI Overrides */
+
+/* Force single-column layout centered on tablet/mobile, fill shell on desktop */
+.workspace {
+  display: block !important;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Hide empty results card initially */
+.result-panel.idle {
+  display: none !important;
+}
+
+/* Style the simplified result panel */
+.result-panel {
+  display: block;
+  max-width: 820px;
+  margin: 24px auto 0;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-elevated);
+}
+
+@media (min-width: 1100px) {
+  .workspace {
+    max-width: 100% !important;
+    margin: 0;
+  }
+  .result-panel {
+    max-width: 100% !important;
+    margin: 24px 0 0;
+  }
+  .intro-card {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+}
+
+/* Form Container Card styling */
+.calculator {
+  padding: clamp(24px, 4vw, 40px) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 12px !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-elevated) !important;
+}
+
+/* spacing inside form-section */
+.form-section {
+  display: grid;
+  gap: 28px;
+}
+
+/* Grid spacing */
+.grid {
+  gap: 22px !important;
+}
+
+/* Form Field Labels */
+.calculator label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+/* Text Inputs & Select Boxes */
+.calculator input[type="number"],
+.calculator select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.98rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(10, 31, 44, 0.01);
+}
+
+.calculator input[type="number"]:hover,
+.calculator select:hover {
+  border-color: var(--rule-strong);
+}
+
+.calculator input[type="number"]:focus,
+.calculator select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Fieldset and Legend styling */
+fieldset {
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+fieldset legend {
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 6px !important;
+  padding: 0 !important;
+}
+
+/* Custom Checkbox Toggle Chips */
+.chips {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-top: 10px !important;
+}
+
+.chips label {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 16px !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 8px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  user-select: none !important;
+  box-shadow: var(--shadow-card);
+}
+
+.chips label input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.chips label:has(input:checked) {
+  border-color: var(--accent) !important;
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  box-shadow: 0 2px 8px rgba(14, 92, 92, 0.08);
+}
+
+.chips label:hover {
+  border-color: var(--rule-strong) !important;
+  background: var(--surface-2) !important;
+}
+
+/* Custom Range Slider */
+.range-label {
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  align-items: center !important;
+  gap: 8px 12px !important;
+}
+
+.range-label span {
+  grid-column: 1;
+}
+
+.range-label strong {
+  grid-column: 2;
+  font-size: 1.15rem;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  border: 1px solid var(--accent-line);
+}
+
+.range-label input[type="range"] {
+  grid-column: 1 / 3;
+  width: 100%;
+  height: 6px;
+  background: var(--surface-3);
+  border-radius: 99px;
+  outline: none;
+  accent-color: var(--accent);
+  cursor: pointer;
+  margin: 6px 0;
+  transition: background 0.2s;
+}
+
+.range-label input[type="range"]:hover {
+  background: var(--rule-strong);
+}
+
+/* Clean score card layout */
+.score-card {
+  display: grid;
+  gap: 24px;
+}
+
+/* Simplified risk badge styling */
+.risk-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.86rem;
+  letter-spacing: 0.05em;
+}
+
+.risk-badge.critical,
+.risk-badge.high {
+  background: var(--warn);
+  color: var(--surface);
+}
+
+.risk-badge.medium {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.risk-badge.low {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Unified Summary Card */
+.summary-card {
+  padding: 24px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.summary-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.summary-card-header strong {
+  font-size: 2.2rem;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.summary-card-header span {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.summary-details {
+  font-size: 0.92rem;
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.summary-details li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--rule);
+  padding-bottom: 6px;
+}
+
+.summary-details li span:last-child {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+
+
+/* CTA layout */
+.cta {
+  margin-top: 10px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.cta h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.cta p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cta-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.cta-actions a:first-child {
+  background: var(--cta);
+  color: var(--surface);
+}
+
+.cta-actions a:first-child:hover {
+  background: var(--cta-strong);
+}
+
+.cta-actions a:last-child {
+  border: 1px solid var(--rule-strong);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.cta-actions a:last-child:hover {
+  background: var(--surface-2);
+}

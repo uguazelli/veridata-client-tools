@@ -103,34 +103,10 @@ function clearError() {
 }
 
 function renderEmptyResult() {
+  document.querySelector(".intro").style.display = "block";
+  dropZone.style.display = "flex";
   resultPanel.className = "result-panel idle";
-  resultPanel.innerHTML = `
-    <div class="result-empty">
-      <span class="mono">${escapeHtml(t("result.emptyKicker"))}</span>
-      <h2>${escapeHtml(t("result.emptyTitle"))}</h2>
-      <p>${escapeHtml(t("result.emptyText"))}</p>
-      <div class="result-teaser" aria-hidden="true">
-        <div class="teaser-score-row">
-          <div class="teaser-meter"><div class="teaser-meter-inner">?</div></div>
-          <div class="teaser-lines">
-            <div class="teaser-pill"></div>
-            <div class="teaser-line"></div>
-            <div class="teaser-line" style="width:50%"></div>
-          </div>
-        </div>
-        <div class="teaser-bars">
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:82%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:35%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:57%"></div></div>
-        </div>
-      </div>
-      <ul class="empty-list">
-        <li>${escapeHtml(t("result.emptyOne"))}</li>
-        <li>${escapeHtml(t("result.emptyTwo"))}</li>
-        <li>${escapeHtml(t("result.emptyThree"))}</li>
-      </ul>
-    </div>
-  `;
+  resultPanel.innerHTML = "";
   previewSection.hidden = true;
   detailsSection.hidden = true;
 }
@@ -220,11 +196,46 @@ function renderReport(report) {
   renderPreview(report);
   renderColumns(report);
 
+  document.querySelector(".intro").style.display = "none";
+  dropZone.style.display = "none";
+
+  const errors = report.issueCounts.error || 0;
+  const warnings = report.issueCounts.warning || 0;
+  let healthScore = 100;
+  let severityClass = "clean";
+  let statusText = "Clean Structure";
+
+  if (errors > 0) {
+    healthScore = 30;
+    severityClass = "critical";
+    statusText = "Errors Detected";
+  } else if (warnings > 0) {
+    healthScore = 70;
+    severityClass = "medium";
+    statusText = "Warnings Detected";
+  }
+
   resultPanel.className = "result-panel";
   resultPanel.innerHTML = `
     <div class="score-card">
-      <span class="mono">${escapeHtml(t("result.kicker"))}</span>
-      <h2>${escapeHtml(report.file.name)}</h2>
+      <div>
+        <span class="mono">${escapeHtml(t("result.kicker"))}</span>
+        <h2>Flat File Structure &amp; Quality Report</h2>
+      </div>
+
+      <div class="report-header-card">
+        <div class="score-meter ${escapeHtml(severityClass)}" style="--score: ${healthScore}">
+          <span>${healthScore}%</span>
+        </div>
+        <div>
+          <span class="risk-badge ${escapeHtml(severityClass)}">${escapeHtml(statusText)}</span>
+          <p style="margin: 8px 0 0; font-size: 0.94rem; color: var(--text-muted); line-height: 1.5;">
+            File Name: <strong>${escapeHtml(report.file.name)}</strong> (${escapeHtml(report.file.sizeLabel)}). 
+            Detected structure: <strong>${report.structure.columns} columns</strong>, 
+            <strong>${report.structure.rows} rows</strong>, with <strong>${escapeHtml(report.structure.delimiterLabel)}</strong> delimiter.
+          </p>
+        </div>
+      </div>
 
       <div>
         <h3>${escapeHtml(t("result.summary"))}</h3>
@@ -254,7 +265,9 @@ function renderReport(report) {
         <div class="export-actions">
           <button type="button" data-export="json">${escapeHtml(t("result.downloadJson"))}</button>
           <button type="button" data-export="pdf">${escapeHtml(t("result.downloadPdf"))}</button>
+          <button type="button" data-print-report class="print-button">Print Report</button>
           <button type="button" data-export="copy">${escapeHtml(t("result.copySummary"))}</button>
+          <button type="button" data-reset-validator style="background: var(--surface); color: var(--text); border: 1px solid var(--rule-strong);">${escapeHtml(t("result.validateAnother"))}</button>
         </div>
       </div>
 
@@ -331,6 +344,22 @@ dropZone.addEventListener("drop", (event) => {
 });
 
 resultPanel.addEventListener("click", async (event) => {
+  const resetButton = event.target.closest("[data-reset-validator]");
+  if (resetButton) {
+    currentFile = null;
+    currentText = "";
+    currentReport = null;
+    renderEmptyResult();
+    fileInput.value = "";
+    return;
+  }
+
+  const printButton = event.target.closest("[data-print-report]");
+  if (printButton) {
+    window.print();
+    return;
+  }
+
   const button = event.target.closest("[data-export]");
   if (!button || !currentReport) return;
   const action = button.dataset.export;

@@ -133,36 +133,10 @@ function escapeHtml(value) {
 }
 
 function renderEmptyResult() {
+  document.querySelector(".intro").style.display = "block";
+  form.style.display = "block";
   resultPanel.className = "result-panel idle";
-  resultPanel.innerHTML = `
-    <div class="result-empty">
-      <span class="mono">${escapeHtml(t("result.emptyKicker"))}</span>
-      <h2>${escapeHtml(t("result.emptyTitle"))}</h2>
-      <p>${escapeHtml(t("result.emptyText"))}</p>
-      <div class="result-teaser" aria-hidden="true">
-        <div class="teaser-score-row">
-          <div class="teaser-meter"><div class="teaser-meter-inner">?</div></div>
-          <div class="teaser-lines">
-            <div class="teaser-pill"></div>
-            <div class="teaser-line"></div>
-            <div class="teaser-line" style="width:60%"></div>
-          </div>
-        </div>
-        <div class="teaser-bars">
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:72%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:44%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:63%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:55%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:38%"></div></div>
-        </div>
-      </div>
-      <ul class="empty-list">
-        <li>${escapeHtml(t("result.emptyScore"))}</li>
-        <li>${escapeHtml(t("result.emptyPain"))}</li>
-        <li>${escapeHtml(t("result.emptyNext"))}</li>
-      </ul>
-    </div>
-  `;
+  resultPanel.innerHTML = "";
 }
 
 function renderCategoryScores(categoryScores) {
@@ -187,19 +161,25 @@ function renderPainPoints(painPoints) {
 }
 
 function renderResult(result) {
+  document.querySelector(".intro").style.display = "none";
+  form.style.display = "none";
   resultPanel.className = "result-panel";
   resultPanel.innerHTML = `
     <div class="score-card">
-      <span class="mono">${escapeHtml(t("result.capturedKicker"))}</span>
-      <h2>${escapeHtml(t("result.scoreHeading", { status: result.status }))}</h2>
+      <div>
+        <span class="mono">${escapeHtml(t("result.capturedKicker"))}</span>
+        <h2>${escapeHtml(t("result.scoreHeading", { status: result.status }))}</h2>
+      </div>
 
-      <div class="readiness-row">
-        <div class="readiness-meter" style="--score: ${result.score}">
+      <div class="report-header-card">
+        <div class="score-meter ${escapeHtml(result.statusKey)}" style="--score: ${result.score}">
           <span>${result.score}</span>
         </div>
         <div>
-          <span class="status-pill ${escapeHtml(result.statusKey)}">${escapeHtml(result.status)}</span>
-          <p>${escapeHtml(t("result.scoreHelp"))}</p>
+          <span class="risk-badge ${escapeHtml(result.statusKey)}">${escapeHtml(result.status)}</span>
+          <p style="margin: 8px 0 0; font-size: 0.94rem; color: var(--text-muted); line-height: 1.5;">
+            ${escapeHtml(t("result.scoreHelp"))}
+          </p>
         </div>
       </div>
 
@@ -223,6 +203,7 @@ function renderResult(result) {
         <p>${escapeHtml(t("result.ctaText"))}</p>
         <div class="cta-actions">
           <a href="mailto:contact@veridatapro.com?subject=API%20readiness%20review">${escapeHtml(t("result.ctaMailLabel"))}</a>
+          <button type="button" data-print-report class="print-button">Print / Export PDF</button>
           <a href="https://veridatapro.com/" target="_blank" rel="noreferrer">${escapeHtml(t("result.visitSite"))}</a>
         </div>
       </div>
@@ -360,6 +341,13 @@ document.addEventListener("click", (event) => {
 
 headerMenu?.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => setMenuOpen(false));
+});
+
+resultPanel.addEventListener("click", (event) => {
+  const printButton = event.target.closest("[data-print-report]");
+  if (printButton) {
+    window.print();
+  }
 });
 
 form.addEventListener("input", updatePreview);

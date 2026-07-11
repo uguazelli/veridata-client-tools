@@ -1,7 +1,6 @@
 const form = document.querySelector("#leadForm");
 const resultPanel = document.querySelector("#resultPanel");
 const formError = document.querySelector("#formError");
-const preview = document.querySelector("#preview");
 const utilizationInput = document.querySelector('input[name="utilizationPct"]');
 const utilizationValue = document.querySelector("#utilizationValue");
 const submitButton = form.querySelector('button[type="submit"]');
@@ -102,34 +101,11 @@ function setMenuOpen(open) {
 }
 
 function renderEmptyResult() {
+  // Ensure the intro and form cards are visible, and results are hidden
+  document.querySelector(".intro").style.display = "block";
+  form.style.display = "block";
   resultPanel.className = "result-panel idle";
-  resultPanel.innerHTML = `
-    <div class="result-empty">
-      <span class="mono">${escapeHtml(t("result.emptyKicker"))}</span>
-      <h2>${escapeHtml(t("result.emptyTitle"))}</h2>
-      <p>${escapeHtml(t("result.emptyText"))}</p>
-      <div class="result-teaser" aria-hidden="true">
-        <div class="teaser-score-row">
-          <div class="teaser-meter"><div class="teaser-meter-inner">?</div></div>
-          <div class="teaser-lines">
-            <div class="teaser-pill"></div>
-            <div class="teaser-line"></div>
-            <div class="teaser-line" style="width:55%"></div>
-          </div>
-        </div>
-        <div class="teaser-bars">
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:38%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:61%"></div></div>
-          <div class="teaser-bar-row"><div class="teaser-bar-label"></div><div class="teaser-bar-fill" style="width:50%"></div></div>
-        </div>
-      </div>
-      <ul class="empty-list">
-        <li>${escapeHtml(t("result.emptyRisk"))}</li>
-        <li>${escapeHtml(t("result.emptyWaste"))}</li>
-        <li>${escapeHtml(t("result.emptyNext"))}</li>
-      </ul>
-    </div>
-  `;
+  resultPanel.innerHTML = "";
 }
 
 function setLanguage(language, { resetResult = true } = {}) {
@@ -150,14 +126,13 @@ function setLanguage(language, { resetResult = true } = {}) {
     renderEmptyResult();
   }
 
-  updatePreview();
+  updateSliderValue();
 }
 
-function updatePreview() {
-  utilizationValue.value = utilizationInput.value;
-  const data = new FormData(form);
-  const footprintComplete = footprintFields.every((field) => data.get(field) !== "");
-  preview.hidden = !footprintComplete;
+function updateSliderValue() {
+  if (utilizationValue && utilizationInput) {
+    utilizationValue.value = utilizationInput.value;
+  }
 }
 
 function showError(message) {
@@ -171,7 +146,7 @@ function clearError() {
 }
 
 function escapeHtml(value) {
-  return String(value)
+  return String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -180,59 +155,77 @@ function escapeHtml(value) {
 }
 
 function renderResult(result) {
-  const severityClass = result.risk.severity;
+  // Hide intro and form card to create a sequential, focused results view
+  document.querySelector(".intro").style.display = "none";
+  form.style.display = "none";
+
+  const severityClass = result.risk.severity || "low";
   const signals = result.signals
     .map(
-      (signal) => `
-        <li class="signal ${escapeHtml(signal.severity)}">
-          <strong>${escapeHtml(signal.title)}</strong>
-          <p>${escapeHtml(signal.message)}</p>
-        </li>
-      `
+      (signal) => `<li><span><strong>${escapeHtml(signal.title)}</strong>: ${escapeHtml(signal.message)}</span></li>`
     )
     .join("");
 
   const recommendations = result.recommendations
-    .map((recommendation) => `<li>${escapeHtml(recommendation)}</li>`)
+    .map((rec) => `<li><span>${escapeHtml(rec)}</span></li>`)
     .join("");
 
   resultPanel.className = "result-panel";
   resultPanel.innerHTML = `
     <div class="score-card">
-      <span class="mono">${escapeHtml(t("result.capturedKicker"))}</span>
-      <h2>${escapeHtml(t("result.utilizationRisk", { level: result.risk.level }))}</h2>
+      <div>
+        <span class="mono">${escapeHtml(t("result.capturedKicker"))}</span>
+        <h2>MuleSoft Cost &amp; Utilization Assessment</h2>
+      </div>
 
-      <div class="risk-row">
-        <div class="risk-meter" style="--score: ${result.risk.score}">
+      <div class="report-header-card">
+        <div class="score-meter ${escapeHtml(severityClass)}" style="--score: ${result.risk.score}">
           <span>${result.risk.score}</span>
         </div>
         <div>
-          <span class="risk-pill ${escapeHtml(severityClass)}">${escapeHtml(result.risk.level)}</span>
-          <p>${escapeHtml(result.disclaimer)}</p>
+          <span class="risk-badge ${escapeHtml(severityClass)}">${escapeHtml(result.risk.level)}</span>
+          <p style="margin: 8px 0 0; font-size: 0.94rem; color: var(--text-muted); line-height: 1.5;">
+            Score calculated from your allocated capacity, deployment topology, and average utilization of ${result.utilizationPct || result.waste.estimatedPercent || 0}%.
+          </p>
         </div>
       </div>
 
-      <div class="waste-box">
-        <strong>${result.waste.estimatedPercent}%</strong>
-        <p>${escapeHtml(result.waste.message)}</p>
-      </div>
-
-      <div class="waste-box">
-        <strong>${escapeHtml(result.footprint.deploymentModel)}</strong>
-        <p>
-          ${escapeHtml(result.footprint.commercialModel)} · ${escapeHtml(result.footprint.renewalTimeline)}
-          · ${escapeHtml(t("result.totalCores", { count: result.footprint.totalCores }))}
+      <div class="summary-card ${escapeHtml(severityClass)}">
+        <div class="summary-card-header">
+          <strong>${result.waste.estimatedPercent}%</strong>
+          <span>Estimated capacity waste</span>
+        </div>
+        <p style="margin: 0 0 16px; font-size: 0.94rem; color: var(--text-muted); line-height: 1.5;">
+          ${escapeHtml(result.waste.message)}
         </p>
+        <ul class="summary-details">
+          <li>
+            <span>Deployment model</span>
+            <span>${escapeHtml(result.footprint.deploymentModel)}</span>
+          </li>
+          <li>
+            <span>Commercial model</span>
+            <span>${escapeHtml(result.footprint.commercialModel)}</span>
+          </li>
+          <li>
+            <span>Renewal timeline</span>
+            <span>${escapeHtml(result.footprint.renewalTimeline)}</span>
+          </li>
+          <li>
+            <span>Total capacity</span>
+            <span>${escapeHtml(t("result.totalCores", { count: result.footprint.totalCores }))}</span>
+          </li>
+        </ul>
       </div>
 
       <div>
-        <h3>${escapeHtml(t("result.signalsHeading"))}</h3>
-        <ul class="signal-list">${signals}</ul>
+        <h3 style="font-size: 1.1rem; margin: 0 0 10px; color: var(--ink);">${escapeHtml(t("result.signalsHeading"))}</h3>
+        <ul class="clean-list">${signals}</ul>
       </div>
 
       <div>
-        <h3>${escapeHtml(t("result.recommendationsHeading"))}</h3>
-        <ul class="recommendations">${recommendations}</ul>
+        <h3 style="font-size: 1.1rem; margin: 0 0 10px; color: var(--ink);">${escapeHtml(t("result.recommendationsHeading"))}</h3>
+        <ul class="clean-list recommendations">${recommendations}</ul>
       </div>
 
       <div class="cta">
@@ -240,6 +233,7 @@ function renderResult(result) {
         <p>${escapeHtml(result.cta.message)}</p>
         <div class="cta-actions">
           <a href="mailto:contact@veridatapro.com?subject=MuleSoft%20optimization%20audit">${escapeHtml(t("result.auditMailLabel"))}</a>
+          <button type="button" data-print-report class="print-button">Print / Export PDF</button>
           <a href="https://veridatapro.com/" target="_blank" rel="noreferrer">${escapeHtml(t("result.visitSite"))}</a>
         </div>
       </div>
@@ -321,8 +315,15 @@ headerMenu?.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => setMenuOpen(false));
 });
 
-form.addEventListener("input", updatePreview);
-form.addEventListener("change", updatePreview);
+resultPanel.addEventListener("click", (event) => {
+  const printButton = event.target.closest("[data-print-report]");
+  if (printButton) {
+    window.print();
+  }
+});
+
+form.addEventListener("input", updateSliderValue);
+form.addEventListener("change", updateSliderValue);
 form.addEventListener("submit", submitForm);
 setLanguage(LANGUAGES.has(currentLanguage) ? currentLanguage : "en", { resetResult: false });
 

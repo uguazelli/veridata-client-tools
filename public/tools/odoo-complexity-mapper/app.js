@@ -283,6 +283,11 @@ function setStep(step) {
   document.querySelectorAll("[data-step-token]").forEach((token) => {
     token.classList.toggle("is-active", Number(token.dataset.stepToken) === step);
   });
+
+  const intro = document.querySelector(".intro");
+  if (intro) {
+    intro.style.display = (step === 3) ? "none" : "block";
+  }
 }
 
 function validateStepOne() {
@@ -363,6 +368,33 @@ function renderScopeSummary(rows) {
           : mediumCount > 0
             ? "posture.config"
             : "posture.low";
+
+  let complexityScore = 95;
+  let severityClass = "low";
+  if (postureKey === "posture.config") {
+    complexityScore = 60;
+    severityClass = "medium";
+  } else if (postureKey !== "posture.low") {
+    complexityScore = 25;
+    severityClass = "critical";
+  }
+
+  const headerCard = document.querySelector("#resultsHeaderCard");
+  if (headerCard) {
+    headerCard.innerHTML = `
+      <div class="report-header-card">
+        <div class="score-meter ${escapeHtml(severityClass)}" style="--score: ${complexityScore}">
+          <span>${complexityScore}%</span>
+        </div>
+        <div>
+          <span class="risk-badge ${escapeHtml(severityClass)}">${escapeHtml(t(postureKey))}</span>
+          <p style="margin: 8px 0 0; font-size: 0.94rem; color: var(--text-muted); line-height: 1.5;">
+            Complexity score determined from <strong>${rows.length} systems</strong> connected to Odoo across <strong>${selectedModules.size} core modules</strong>.
+          </p>
+        </div>
+      </div>
+    `;
+  }
 
   scopeSummary.innerHTML = `
     <div class="scope-card">
@@ -779,6 +811,7 @@ headerMenu?.querySelectorAll("a").forEach((link) => {
 });
 
 exportPdfButton?.addEventListener("click", exportResultsPdf);
+document.querySelector("[data-print-report]")?.addEventListener("click", exportResultsPdf);
 
 window.addEventListener("afterprint", () => {
   document.body.classList.remove("printing-results");

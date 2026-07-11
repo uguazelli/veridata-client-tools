@@ -103,7 +103,8 @@ export const TRANSLATIONS = {
     "file.modified": "Modified",
     "errors.read": "Unable to read this file.",
     "errors.empty": "This file appears to be empty.",
-    "errors.noFile": "Choose a file first."
+    "errors.noFile": "Choose a file first.",
+    "result.validateAnother": "Validate another file"
   },
   pt: {
     "meta.title": "Validador de arquivos flat | VeriDataPro",
@@ -208,7 +209,8 @@ export const TRANSLATIONS = {
     "file.modified": "Modificado",
     "errors.read": "Não foi possível ler este arquivo.",
     "errors.empty": "Este arquivo parece estar vazio.",
-    "errors.noFile": "Escolha um arquivo primeiro."
+    "errors.noFile": "Escolha um arquivo primeiro.",
+    "result.validateAnother": "Validar outro arquivo"
   },
   es: {
     "meta.title": "Validador de archivos planos | VeriDataPro",
@@ -313,6 +315,7 @@ export const TRANSLATIONS = {
     "file.modified": "Modificado",
     "errors.read": "No fue posible leer este archivo.",
     "errors.empty": "Este archivo parece estar vacío.",
-    "errors.noFile": "Elige un archivo primero."
+    "errors.noFile": "Elige un archivo primero.",
+    "result.validateAnother": "Validar otro archivo"
   }
 };
